@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: nextjs
+spec:
+  tls:
+    termination: edge
+  to:
+    name: nextjs
+    kind: Service
+    weight: 100
+  wildcardPolicy: None
