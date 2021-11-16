@@ -35,7 +35,7 @@ spec:
           - name: commit-sha
             value: $(tt.params.commit-sha)
           - name: image-repo
-            value: quay.io/bott_ibm/bott-node
+            value: quay.io/bott_ibm/nextjs
         pipelineRef:
           name: nextjs-pipeline
         workspaces:
