@@ -5,6 +5,8 @@ metadata:
 spec:
   workspaces:
     - name: shared-data
+    - name: gitops-repository
+    - name: git-credentials
   params:
     - name: app-name
     - name: source-repo
@@ -85,3 +87,22 @@ spec:
       workspaces:
         - name: source
           workspace: shared-data
+    - name: save-configuration
+      params:
+        - name: manifest
+          value: "$(tasks.kustomize.results.manifest)"
+        - name: app-name
+          value: "$(params.app-name)"
+        - name: sha
+          value: "$(tasks.git-clone.results.commit)"
+      runAfter:
+        - deploy
+      taskRef:
+        name: save-configuration
+      workspaces:
+        - name: source
+          workspace: shared-data
+        - name: target
+          workspace: gitops-repository
+        - name: git-credentials
+          workspace: git-credentials

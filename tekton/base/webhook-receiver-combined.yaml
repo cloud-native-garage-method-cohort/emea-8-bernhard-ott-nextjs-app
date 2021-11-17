@@ -24,12 +24,12 @@ spec:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        generateName: nextjs-pipeline-run-
+        generateName: nextjs-pipeline-webhook-run-
       spec:
         serviceAccountName: nextjs-bot
         params:
           - name: app-name
-            value: bott-node
+            value: nextjs
           - name: source-repo
             value: $(tt.params.source-repo)
           - name: commit-sha
@@ -47,6 +47,17 @@ spec:
                 resources:
                   requests:
                     storage: 1Gi
+          - name: gitops-repository
+            volumeClaimTemplate:
+              spec:
+                resources:
+                  requests:
+                    storage: 1Gi
+                accessModes:
+                - ReadWriteOnce
+          - name: git-credentials
+            secret:
+              secretName: git-credentials
 
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
