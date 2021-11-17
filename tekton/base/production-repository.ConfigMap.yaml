@@ -6,4 +6,4 @@ data:
   branch: main
   host: github.com
   org: cloud-native-garage-method-cohort
-  repo: emea-8-bernhard-ott-express-gitops-prod
+  repo: emea-8-production
